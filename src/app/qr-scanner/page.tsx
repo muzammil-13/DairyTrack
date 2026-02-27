@@ -8,6 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import { logDelivery } from "@/services/delivery";
 import { getCustomer } from "@/services/customer";
 import { Check, XCircle } from "lucide-react";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function QRScannerPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -17,15 +18,34 @@ export default function QRScannerPage() {
   const [deliveryLogged, setDeliveryLogged] = useState(false);
 
   useEffect(() => {
+    let stream: MediaStream | null = null;
+    let isMounted = true;
+
     const getCameraPermission = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        let mediaStream: MediaStream;
+        try {
+          // Attempt to use the back camera specifically (forces environment camera)
+          mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } });
+        } catch (e) {
+          // Fallback to default camera strategy if specific back camera fails (e.g. on desktop)
+          mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        }
+        
+        if (!isMounted) {
+          mediaStream.getTracks().forEach(track => track.stop());
+          return;
+        }
+        
+        stream = mediaStream;
         setHasCameraPermission(true);
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          videoRef.current.setAttribute("playsinline", "true"); // Required for iOS
         }
       } catch (error) {
+        if (!isMounted) return;
         console.error('Error accessing camera:', error);
         setHasCameraPermission(false);
         toast({
@@ -37,6 +57,13 @@ export default function QRScannerPage() {
     };
 
     getCameraPermission();
+
+    return () => {
+      isMounted = false;
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
   }, []);
 
   const handleScan = () => {
@@ -80,6 +107,7 @@ export default function QRScannerPage() {
 
       if (simulatedCustomerId) {
         setScanResult(simulatedCustomerId);
+        setDeliveryLogged(false); // Reset logged state for new scan
         setScanning(false);
         toast({
           title: 'QR Code Scanned',
@@ -151,6 +179,7 @@ export default function QRScannerPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Card className="w-full max-w-md">
         <CardHeader>
@@ -159,7 +188,7 @@ export default function QRScannerPage() {
         <CardContent className="flex flex-col gap-4">
           {hasCameraPermission ? (
             <>
-              <video ref={videoRef} className="w-full aspect-video rounded-md" autoPlay muted />
+              <video ref={videoRef} className="w-full aspect-video rounded-md object-cover" autoPlay muted playsInline />
               <Button onClick={handleScan} disabled={scanning}>
                 {scanning ? 'Scanning...' : 'Scan QR Code'}
               </Button>
@@ -189,5 +218,6 @@ export default function QRScannerPage() {
         </CardContent>
       </Card>
     </div>
+    </ProtectedRoute>
   );
 }
