@@ -1,0 +1,90 @@
+
+> nextn@0.1.0 dev
+> next dev --turbopack -p 9002
+
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'allowedDevOrigins' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 15.5.12 (Turbopack)
+   - Local:        http://localhost:9002
+   - Network:      http://192.168.226.224:9002
+   - Environments: .env
+   - Experiments (use with caution):
+     · allowedDevOrigins
+
+ ✓ Starting...
+ ✓ Ready in 3.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 12.8s
+ ⨯ ./src/context/AuthContext.tsx:1:2
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m d[32m"use client"[39m[33m;[39m
+ [90m   |[39m  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { createContext[33m,[39m useContext[33m,[39m useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { onAuthStateChanged[33m,[39m [33mUser[39m } [36mfrom[39m [32m"firebase/auth"[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m { auth } [36mfrom[39m [32m"@/lib/firebase"[39m[33m;[39m[0m
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./src/context/AuthContext.tsx [Client Component Browser]
+    ./src/app/providers.tsx [Client Component Browser]
+    ./src/app/providers.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/context/AuthContext.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 2.7s
+ GET / 500 in 16366ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 1056ms
+ GET /favicon.ico 500 in 1702ms
+ ⨯ ./node_modules/firebase/firestore/dist/index.mjs:1:1
+Module not found: Can't resolve '@firebase/firestore'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mexport[39m [33m*[39m [36mfrom[39m [32m'@firebase/firestore'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [90m//# sourceMappingURL=index.mjs.map[39m
+ [90m 3 |[39m[0m
+
+
+
+Import trace:
+  Client Component SSR:
+    ./node_modules/firebase/firestore/dist/index.mjs [Client Component SSR]
+    ./src/lib/firebase.ts [Client Component SSR]
+    ./src/context/AuthContext.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./node_modules/firebase/firestore/dist/index.mjs:1:1
+Module not found: Can't resolve '@firebase/firestore'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mexport[39m [33m*[39m [36mfrom[39m [32m'@firebase/firestore'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [90m//# sourceMappingURL=index.mjs.map[39m
+ [90m 3 |[39m[0m
+
+
+
+Import trace:
+  Client Component SSR:
+    ./node_modules/firebase/firestore/dist/index.mjs [Client Component SSR]
+    ./src/lib/firebase.ts [Client Component SSR]
+    ./src/context/AuthContext.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Client Component SSR]
+    ./src/app/providers.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
