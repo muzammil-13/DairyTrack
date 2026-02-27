@@ -1,2 +1,36 @@
+# macOS
+.DS_Store
+
+# project archives
 DairyTrack-project.zip
-node_modules
+
+# dependencies
+node_modules/
+
+# environment files
+.env
+.env.local
+.env.*.local
+
+# Next.js build output
+.next/
+
+# misc
+.idx
+.vscode/
+.modified
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# testing
+coverage/
+
+# production
+build/
+dist/
+
+# OS generated files
+Thumbs.db
